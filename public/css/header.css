@@ -29,10 +29,10 @@
     font-size: 30px;
     white-space: nowrap;
     color: black;
-    border-radius: 4px;
+    border-radius: 8px;
     padding: 5px;
     background-color: #dadada;
     text-decoration: none;
-    border: solid 2px black;
+    border: solid 3px #3a3a3a;
     box-shadow: 0 0 20px #3b3b3b;
 }

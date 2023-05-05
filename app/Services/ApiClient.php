@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Character;
 use App\Models\Episode;
 use GuzzleHttp\Client;
-use GuzzleHttp\Promise\Create;
 
 class ApiClient
 {
