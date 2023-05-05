@@ -16,12 +16,12 @@ class RickAndMortyController
 
     public function main(): View
     {
-        $characters = $this->apiClient->fetchCharacters();
+        $characters = $this->apiClient->fetchMainCharacters();
         $contentList = $this->apiClient->associateEpisodeName($characters);
         return new View('main', ['characters' => $contentList]);
     }
 
-    public function searched(): View
+    public function search(): View
     {
         $contentList = [];
         if (!empty($_POST)) {
@@ -43,8 +43,7 @@ class RickAndMortyController
     {
         $characterId = $variables['id'];
         $character = $this->apiClient->fetchCharacter($characterId);
-        $episodeIdList = $this->apiClient->createSingletonEpisodeIdList($character);
-        $episodeList = $this->apiClient->fetchEpisodes($episodeIdList);
+        $episodeList = $this->apiClient->fetchEpisodes($character->getEpisodeIdList());
         return new View('singleton', ['character' => $character, 'episodes' => $episodeList]);
     }
 }

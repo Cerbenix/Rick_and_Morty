@@ -5,8 +5,8 @@ use App\Controllers\RickAndMortyController;
 
 return [
     ['GET', '/', [RickAndMortyController::class, 'main']],
-    ['GET', '/search', [RickAndMortyController::class, 'searched']],
-    ['POST', '/search', [RickAndMortyController::class, 'searched']],
+    ['GET', '/search', [RickAndMortyController::class, 'search']],
+    ['POST', '/search', [RickAndMortyController::class, 'search']],
     ['GET', '/character/{id}', [RickAndMortyController::class, 'singleton']],
     ['GET', '/error/{message}', [ErrorController::class, 'print']],
 ];

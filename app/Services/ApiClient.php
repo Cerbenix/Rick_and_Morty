@@ -18,16 +18,16 @@ class ApiClient
         ]);
     }
 
-    public function fetchCharacters(): array
+    public function fetchMainCharacters(): array
     {
         $response = $this->apiClient->get('api/character');
         $report = json_decode($response->getBody()->getContents());
         return $this->collectCharacters($report);
     }
 
-    public function fetchCharacter(string $id): Character
+    public function fetchCharacter(string $characterId): Character
     {
-        $response = $this->apiClient->get('api/character/' . $id);
+        $response = $this->apiClient->get('api/character/' . $characterId);
         $report = json_decode($response->getBody()->getContents());
         return $this->createCharacter($report);
     }
@@ -63,27 +63,17 @@ class ApiClient
         return null;
     }
 
-    public function associateEpisodeName(array $characters): array
+    public function associateEpisodeName(array $characterList): array
     {
-        $episodes = $this->fetchEpisodes($this->createEpisodeIdList($characters));
-        foreach ($characters as $character) {
+        $episodes = $this->fetchEpisodes($this->createEpisodeIdList($characterList));
+        foreach ($characterList as $character) {
             foreach ($episodes as $episode) {
                 if ($character->getEpisodeIdList()[0] == $episode->getID()) {
                     $character->setEpisodeName($episode->getName());
                 }
             }
         }
-        return $characters;
-    }
-
-    public function createSingletonEpisodeIdList(Character $character): array
-    {
-        $episodeIdList = [];
-        $episodeCount = count($character->getEpisodeIdList());
-        for ($index = 0; $index < $episodeCount; $index++) {
-            $episodeIdList[] = $character->getEpisodeIdList()[$index];
-        }
-        return $episodeIdList;
+        return $characterList;
     }
 
     public function fetchEpisodes(array $episodeIdList): array
@@ -94,52 +84,52 @@ class ApiClient
         return $this->collectEpisodes($report);
     }
 
-    private function createEpisodeIdList(array $characters): array
+    private function createEpisodeIdList(array $characterList): array
     {
         $episodeIdList = [];
-        foreach ($characters as $character) {
+        foreach ($characterList as $character) {
             $episodeIdList[] = $character->getEpisodeIdList()[0];
         }
         return $episodeIdList;
     }
 
-    private function collectEpisodes(\stdClass $report): array
+    private function collectEpisodes(\stdClass $episodeReport): array
     {
         $episodeCollection = [];
-        if (!isset($report->id)) {
-            foreach ($report as $episode) {
+        if (!isset($episodeReport->id)) {
+            foreach ($episodeReport as $episode) {
                 $episodeCollection[] = new Episode($episode->id, $episode->name, $episode->episode);
             }
         } else {
-            $episodeCollection[] = new Episode($report->id, $report->name, $report->episode);
+            $episodeCollection[] = new Episode($episodeReport->id, $episodeReport->name, $episodeReport->episode);
         }
         return $episodeCollection;
     }
 
-    private function collectCharacters(\stdClass $report): array
+    private function collectCharacters(\stdClass $characterListReport): array
     {
         $characterCollection = [];
-        foreach ($report->results as $character) {
+        foreach ($characterListReport->results as $character) {
             $characterCollection[] = $this->createCharacter($character);
         }
         return $characterCollection;
     }
 
-    private function createCharacter(\stdClass $character): Character
+    private function createCharacter(\stdClass $characterReport): Character
     {
         $episodeIdList = [];
-        foreach ($character->episode as $episode) {
+        foreach ($characterReport->episode as $episode) {
             $episodeIdList[] = preg_replace('/[^0-9]/', '', $episode);
         }
         return new Character(
-            $character->id,
-            $character->name,
-            $character->url,
-            $character->status,
-            $character->species,
-            $character->location->name,
+            $characterReport->id,
+            $characterReport->name,
+            $characterReport->url,
+            $characterReport->status,
+            $characterReport->species,
+            $characterReport->location->name,
             $episodeIdList,
-            $character->image
+            $characterReport->image
         );
     }
 }

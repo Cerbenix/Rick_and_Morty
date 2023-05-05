@@ -4,6 +4,7 @@ namespace App\Models;
 
 class Character
 {
+    private int $id;
     private string $name;
     private string $status;
     private string $species;
@@ -12,7 +13,6 @@ class Character
     private string $image;
     private string $url;
     private ?string $episodeName = null;
-    private int $id;
 
     public function __construct(
         int    $id,
