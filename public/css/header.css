@@ -1,0 +1,38 @@
+.header-container {
+    display: flex;
+    justify-content: space-evenly;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 80px;
+    background-color: #594c62;
+    z-index: 1;
+    box-shadow: 0 0 20px 0 #333333;
+}
+
+.header-title {
+    font-size: 50px;
+    margin: 5px;
+    white-space: nowrap;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #3a3a3a;
+    text-decoration: none;
+}
+
+.search-button {
+    display: flex;
+    align-self: center;
+    height: auto;
+    font-size: 30px;
+    white-space: nowrap;
+    color: black;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: #dadada;
+    text-decoration: none;
+    border: solid 2px black;
+    box-shadow: 0 0 20px #3b3b3b;
+}

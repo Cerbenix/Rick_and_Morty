@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rick And Morty</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/characterCard.css">
+
+</head>
+<body>
+<header class="header-container">
+    <a class="header-title" href="/">Rick And Morty</a>
+    <a class="search-button" href="/search">Find Characters</a>
+</header>
+<main class="layout">
+    <article class="singleton-character-card">
+        <div class="singleton-img-container">
+            <img src="{{ character.getImage() }}" alt="">
+        </div>
+        <div class="content-container">
+            <div class="content">
+                <a class="link" href="/character/{{ character.getId() }}">
+                    <h2>{{ character.getName() }}</h2>
+                </a>
+                <span class="status">
+                    {% if character.getStatus() == 'Alive' %}
+                        <span class="status-icon" style="background: green;"></span>
+                    {% elseif character.getStatus() == 'Dead' %}
+                        <span class="status-icon" style="background: #b40000;"></span>
+                    {% else %}
+                        <span class="status-icon" style="background: gray;"></span>
+                    {% endif %}
+                    {{ character.getStatus() }} - {{ character.getSpecies() }}
+                </span>
+            </div>
+            <div class="content">
+                <span class="constant-grey">Last known location:</span>
+                <a class="link">
+                    {{ character.getLocation() }}
+                </a>
+            </div>
+            <div class="content">
+                <span class="constant-grey">Seen in:</span>
+                {% for episode in episodes %}
+                    <a class="link">
+                        {{ episode.getEpisode() }} - {{ episode.getName() }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </article>
+</main>
+</body>
+</html>

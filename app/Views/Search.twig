@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rick And Morty</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/characterCard.css">
+    <link rel="stylesheet" href="css/searchForm.css">
+
+</head>
+<body>
+<header class="header-container">
+    <a class="header-title" href="/">Rick And Morty</a>
+</header>
+<div class="search-form-container">
+    <form class="search-form" method="POST" action="/search">
+        <div class="sub-container">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Rick">
+
+            <label for="species">Species:</label>
+            <input type="text" id="species" name="species" placeholder="Human">
+
+            <label for="type">Type:</label>
+            <input type="text" id="type" name="type" placeholder="Rick's Toxic Side">
+        </div>
+        <div class="sub-container">
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="">Any</option>
+                <option value="alive">Alive</option>
+                <option value="dead">Dead</option>
+                <option value="unknown">Unknown</option>
+            </select>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="">Any</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="genderless">Genderless</option>
+                <option value="unknown">Unknown</option>
+            </select>
+
+            <button type="submit">Search</button>
+        </div>
+    </form>
+</div>
+<main class="layout">
+    {% for character in characters %}
+        <article class="character-card">
+            <div class="img-container">
+                <img src="{{ character.getImage() }}" alt="">
+            </div>
+            <div class="content-container">
+                <div class="content">
+                    <a class="link" href="/character/{{ character.getId() }}">
+                        <h2>{{ character.getName() }}</h2>
+                    </a>
+                    <span class="status">
+                    {% if character.getStatus() == 'Alive' %}
+                        <span class="status-icon" style="background: green;"></span>
+                    {% elseif character.getStatus() == 'Dead' %}
+                        <span class="status-icon" style="background: #b40000;"></span>
+                    {% else %}
+                        <span class="status-icon" style="background: gray;"></span>
+                    {% endif %}
+                        {{ character.getStatus() }} - {{ character.getSpecies() }}
+                </span>
+                </div>
+                <div class="content">
+                    <span class="constant-grey">Last known location:</span>
+                    <a class="link">
+                        {{ character.getLocation() }}
+                    </a>
+                </div>
+                <div class="content">
+                    <span class="constant-grey">First seen in:</span>
+                    <a class="link">
+                        {{ character.getEpisodeName() }}
+                    </a>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+</main>
+</body>
+</html>
