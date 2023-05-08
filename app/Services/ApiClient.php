@@ -117,7 +117,7 @@ class ApiClient
                 $unCachedEpisodeIdList[] = $episodeId;
             } else {
                 $episodeFromCache = json_decode(Cache::get('episode_' . $episodeId));
-                $episodeList[] = $this->createEpisodes($episodeFromCache);
+                $episodeList[] = $this->createEpisode($episodeFromCache);
             }
         }
 
@@ -130,13 +130,13 @@ class ApiClient
                 $report = json_decode($responseBody);
 
                 foreach ($report as $episode) {
-                    $episodeList[] = $this->createEpisodes($episode);
+                    $episodeList[] = $this->createEpisode($episode);
                     $episodeEncode = json_encode($episode);
                     Cache::save('episode_' . $episode->id, $episodeEncode);
                 }
             } else {
                 $episode = json_decode($responseBody);
-                $episodeList[] = $this->createEpisodes($episode);
+                $episodeList[] = $this->createEpisode($episode);
                 $episodeEncode = json_encode($episode);
                 Cache::save('episode_' . $episode->id, $episodeEncode);
             }
@@ -154,7 +154,7 @@ class ApiClient
         return $episodeIdList;
     }
 
-    private function createEpisodes(\stdClass $episodeReport): Episode
+    private function createEpisode(\stdClass $episodeReport): Episode
     {
         return new Episode($episodeReport->id, $episodeReport->name, $episodeReport->episode);
     }
