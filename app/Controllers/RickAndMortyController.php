@@ -14,11 +14,35 @@ class RickAndMortyController
         $this->apiClient = new ApiClient();
     }
 
-    public function main(): View
+    public function index(): View
     {
-        $characters = $this->apiClient->fetchMainCharacters();
+        $characters = $this->apiClient->fetchCharacters(1);
         $contentList = $this->apiClient->associateEpisodeName($characters);
-        return new View('main', ['characters' => $contentList]);
+        return new View('main', [
+            'characters' => $contentList,
+            'nextPage' => 2
+        ]);
+    }
+
+    public function paginator(array $variables): View
+    {
+
+        if (!empty($_POST)) {
+            if ($_POST['page'] == '') {
+                $_POST['page'] = 1;
+            }
+            header('Location: /page/' . $_POST['page']);
+        }
+        $pageNr = isset($variables['page']) ? (int)$variables['page'] : 1;
+        $characters = $this->apiClient->fetchCharacters($pageNr);
+        $contentList = $this->apiClient->associateEpisodeName($characters);
+        $previousPage = ($pageNr >= 2) ? $pageNr - 1 : null;
+        $nextPage = ($pageNr < 42) ? $pageNr + 1 : null;
+        return new View('main', [
+            'characters' => $contentList,
+            'previousPage' => $previousPage,
+            'nextPage' => $nextPage
+        ]);
     }
 
     public function search(): View
@@ -32,7 +56,7 @@ class RickAndMortyController
                 $_POST['type'],
                 $_POST['gender'],
             );
-            if ($characters != null) {
+            if (!empty($characters)) {
                 $contentList = $this->apiClient->associateEpisodeName($characters);
             }
         }

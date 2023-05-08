@@ -8,6 +8,8 @@
     "require": {
         "guzzlehttp/guzzle": "^7.5",
         "nikic/fast-route": "^1.3",
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "nesbot/carbon": "^2.66",
+        "ext-json": "*"
     }
 }
