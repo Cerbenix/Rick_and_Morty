@@ -17,7 +17,7 @@
     <a class="header-title" href="/">Rick And Morty</a>
     <div class="dropdown">
         <select onChange="window.location.href=this.value">
-            <option value="">Select Location</option>
+            <option value="">Location</option>
             {% for location in allLocations %}
                 <option value="/location/{{ location.getId() }}">{{ location.getName() }}</option>
             {% endfor %}

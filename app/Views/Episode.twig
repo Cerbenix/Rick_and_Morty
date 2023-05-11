@@ -17,7 +17,7 @@
     <a class="header-title" href="/">Rick And Morty</a>
     <div class="dropdown">
         <select onChange="window.location.href=this.value">
-            <option value="">Select Episode</option>
+            <option value="">Episode</option>
             {% for episode in allEpisodes %}
             <option value="/episode/{{ episode.getId() }}">{{ episode.getEpisode }} - {{ episode.getName }}</option>
             {% endfor %}

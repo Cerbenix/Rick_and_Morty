@@ -30,7 +30,7 @@
     </div>
     <div class="dropdown">
         <select onChange="window.location.href=this.value">
-            <option value="">Select Episode</option>
+            <option value="">Episode</option>
             {% for episode in allEpisodes %}
                 <option value="/episode/{{ episode.getId() }}">{{ episode.getEpisode }} - {{ episode.getName }}</option>
             {% endfor %}
@@ -38,7 +38,7 @@
     </div>
     <div class="dropdown">
         <select onChange="window.location.href=this.value">
-            <option value="">Select Location</option>
+            <option value="">Location</option>
             {% for location in allLocations %}
                 <option value="/location/{{ location.getId() }}">{{ location.getName() }}</option>
             {% endfor %}
