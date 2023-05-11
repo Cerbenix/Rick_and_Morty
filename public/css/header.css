@@ -57,6 +57,7 @@
     margin: 0 5px 0 0;
     border: solid 3px #3a3a3a;
     box-shadow: 0 0 20px #3b3b3b;
+    background-color: #dadada;
 }
 
 .GO-button {
@@ -65,11 +66,28 @@
     font-size: 20px;
     cursor: pointer;
     box-shadow: 0 0 20px #3b3b3b;
+    background-color: #dadada;
 }
 
 .navigation-button {
     height: 30px;
     width: 30px;
     justify-content: center;
-
+    background-color: #dadada;
+}
+.dropdown {
+    display: flex;
+    align-self: center;
+    border: solid 3px #3a3a3a;
+    border-radius: 8px;
+    box-shadow: 0 0 20px #3b3b3b;
+}
+.dropdown select {
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 10px 5px 10px 5px;
+    border: none;
+    width: 150px;
+    background-color: #dadada;
+    box-shadow: inset 1px 1px 8px rgba(0, 0, 0, 0.22);
 }

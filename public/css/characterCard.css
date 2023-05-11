@@ -1,6 +1,9 @@
 .link, .content {
     color: white;
 }
+.link:hover {
+    color: #ff8400;
+}
 
 .character-card {
     display: flex;

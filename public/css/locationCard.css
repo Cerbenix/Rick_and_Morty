@@ -1,0 +1,17 @@
+.location-container{
+    padding: 0 20px 0 20px;
+    display: flex;
+    width: 400px;
+    border-radius: 15px;
+    background-color: #162342;
+    margin: 10px;
+    height: 200px;
+    box-shadow: 0 0 10px #3b3b3b;
+}
+.location-container h2 {
+    margin: 0;
+}
+.content-text {
+    font-size: 16px;
+    padding: 5px 20px 5px 5px;
+}

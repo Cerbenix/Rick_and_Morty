@@ -1,0 +1,13 @@
+.episode-container {
+    display: flex;
+    justify-content: center;
+    border-radius: 15px;
+    background-color: #162342;
+    margin: 10px;
+    padding: 0 20px 0 20px;
+    box-shadow: 0 0 10px #3b3b3b;
+}
+.episode-container h2 {
+    color: white;
+    white-space: nowrap;
+}

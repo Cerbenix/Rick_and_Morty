@@ -9,33 +9,12 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/characterCard.css">
+    <link rel="stylesheet" href="/css/locationCard.css">
 
 </head>
 <body>
 <header class="header-container">
     <a class="header-title" href="/">Rick And Morty</a>
-    <div class=navigation-container>
-        {% if previousPage == 1 %}
-            <a href="/" class="navigation-button"><</a>
-        {% elseif previousPage > 1 %}
-            <a href="/page/{{ previousPage }}" class="navigation-button"><</a>
-        {% endif %}
-        <form class="navigation" method="POST" action="/page">
-            <input type="text" id="page" name="page" placeholder="1-42" pattern="[1-9]|[1-3][0-9]|4[0-2]">
-            <button class="GO-button" type="submit">GO</button>
-        </form>
-        {% if nextPage %}
-            <a href="/page/{{ nextPage }}" class="navigation-button">></a>
-        {% endif %}
-    </div>
-    <div class="dropdown">
-        <select onChange="window.location.href=this.value">
-            <option value="">Select Episode</option>
-            {% for episode in allEpisodes %}
-                <option value="/episode/{{ episode.getId() }}">{{ episode.getEpisode }} - {{ episode.getName }}</option>
-            {% endfor %}
-        </select>
-    </div>
     <div class="dropdown">
         <select onChange="window.location.href=this.value">
             <option value="">Select Location</option>
@@ -44,8 +23,26 @@
             {% endfor %}
         </select>
     </div>
-    <a class="search-button" href="/search">Find Characters</a>
 </header>
+<div class="layout">
+    <div class="location-container">
+        <div class="content-container">
+            <div class="content">
+                    <h2>{{ location.getName() }}</h2>
+            </div>
+            <div class="content">
+                <span class="constant-grey">Type:</span>
+                <span class="content-text">
+                {{ location.getType() }}
+            </span>
+                <span class="constant-grey">Dimension:</span>
+                <span class="content-text">
+                {{ location.getDimension() }}
+            </span>
+            </div>
+        </div>
+    </div>
+</div>
 <main class="layout">
     {% for character in characters %}
         <article class="character-card">

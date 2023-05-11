@@ -8,19 +8,19 @@ class Character
     private string $name;
     private string $status;
     private string $species;
-    private string $location;
+    private string $locationName;
     private array $episodeIdList;
     private string $image;
-    private string $url;
     private ?string $episodeName = null;
+    private int $locationId;
 
     public function __construct(
         int    $id,
         string $name,
-        string $url,
         string $status,
         string $species,
-        string $location,
+        string $locationName,
+        int    $locationId,
         array  $episodeIdList,
         string $image
     )
@@ -29,10 +29,10 @@ class Character
         $this->name = $name;
         $this->status = $status;
         $this->species = $species;
-        $this->location = $location;
+        $this->locationName = $locationName;
         $this->episodeIdList = $episodeIdList;
         $this->image = $image;
-        $this->url = $url;
+        $this->locationId = $locationId;
     }
 
     public function getId(): int
@@ -55,9 +55,9 @@ class Character
         return $this->image;
     }
 
-    public function getLocation(): string
+    public function getLocationName(): string
     {
-        return $this->location;
+        return $this->locationName;
     }
 
     public function getSpecies(): string
@@ -70,10 +70,6 @@ class Character
         return $this->status;
     }
 
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
 
     public function setEpisodeName(string $episodeName): void
     {
@@ -83,5 +79,10 @@ class Character
     public function getEpisodeName(): ?string
     {
         return $this->episodeName;
+    }
+
+    public function getLocationId(): int
+    {
+        return $this->locationId;
     }
 }

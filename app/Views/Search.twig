@@ -74,13 +74,19 @@
                 </div>
                 <div class="content">
                     <span class="constant-grey">Last known location:</span>
-                    <a class="link">
-                        {{ character.getLocation() }}
-                    </a>
+                    {% if character.getLocationId() != 0 %}
+                        <a class="link" href="/location/{{ character.getLocationId() }}">
+                            {{ character.getLocationName() }}
+                        </a>
+                    {% else %}
+                        <a class="link">
+                            {{ character.getLocationName() }}
+                        </a>
+                    {% endif %}
                 </div>
                 <div class="content">
                     <span class="constant-grey">First seen in:</span>
-                    <a class="link">
+                    <a class="link" href="/episode/{{ character.getEpisodeIdList()[0] }}">
                         {{ character.getEpisodeName() }}
                     </a>
                 </div>
